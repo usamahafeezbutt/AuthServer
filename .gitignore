@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Allow Angular Client folder
+!Presentation/Client/
+# But still ignore build artifacts
+Presentation/Client/node_modules/
+Presentation/Client/dist/
+Presentation/Client/.angular/
+Presentation/Client/.cache/
+Presentation/Client/public/
+Presentation/Client/.vscode/
+/src/Presentation/AuthServer.WebApp/Client/auth-client/.vscode
+/src/Presentation/AuthServer.WebApp/Client/auth-client/.angular/cache/20.1.3/auth-client

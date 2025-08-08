@@ -1,0 +1,96 @@
+@import "primeicons/primeicons.css";
+
+/* Prevent Scrollbars */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+}
+
+/* Wrapper takes full height */
+.layout-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #7f858a;
+  color: white;
+  padding: 0.5rem 2rem;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Cursive', sans-serif;
+  letter-spacing: 2px;
+}
+
+.auth-buttons button {
+  margin-left: 1rem;
+}
+
+/* Centered Content */
+.home-section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.home-section h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Cursive', sans-serif;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-text {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}

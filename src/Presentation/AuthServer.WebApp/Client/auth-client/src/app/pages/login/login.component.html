@@ -1,0 +1,40 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="logo" >𝕌𝕄ℙ</div>
+    <!-- External Login Buttons -->
+    <div class="social-buttons mt-5">
+      <button pButton (click)="loginWithExternalProvider('Google')" icon="pi pi-google" label="Google" class="p-button-contrast p-button-outlined p-button-sm"></button>
+      <button pButton (click)="loginWithExternalProvider('LinkedIn')" icon="pi pi-linkedin" label="LinkedIn" class="p-button-contrast p-button-outlined p-button-sm"></button>
+      <button pButton (click)="loginWithExternalProvider('Microsoft')" icon="pi pi-microsoft" label="Microsoft" class="p-button-contrast p-button-outlined p-button-sm"></button>
+    </div>
+
+    <!-- Login Form -->
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="login()" >
+      <div class="p-fluid">
+        <p-floatlabel variant="on" class="w-100">
+          <label for="email">Email</label>
+          <input id="email"  class="w-100" [fluid]="true" type="email" pInputText formControlName="email" />
+        </p-floatlabel>
+
+        <p-floatlabel variant="on" class="mt-2 w-100" >
+          <p-password 
+            formControlName="password" 
+            inputId="password"
+            [feedback]="false"
+            minLength="12"
+            toggleMask="true"
+            style="width: 100%;"
+            [fluid]="true">
+          </p-password>
+          <label for="password">Password</label>
+        </p-floatlabel>
+
+        <button pButton label="Sign In" [disabled]="loginForm.invalid" class="p-button-contrast p-button-outlined p-button-rounded mt-3" [fluid]="true"></button>
+        
+      </div>
+    </form>
+    <div class="flex justify-content-end mt-2">
+        <p class="font-medium no-underline w-100 text-right cursor-pointer sign-in-navigator" routerLink="/register">Register>></p>
+    </div>
+  </div>
+</div>

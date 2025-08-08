@@ -1,0 +1,55 @@
+<div class="layout-wrapper">
+  <!-- Top Bar -->
+  <p-confirmdialog />
+  <div class="topbar">
+    <div class="logo" routerLink="/">𝕌𝕄ℙ</div>
+    @if (!isUserLoggedIn){
+      <div  class="auth-buttons">
+        <button pButton label="Login" routerLink="login" class="p-button-secondary p-button-sm"></button>
+        <button pButton label="Register" routerLink="register"  class="p-button-secondary p-button-sm"></button>
+      </div>
+    }
+    @if(isUserLoggedIn){
+      @if(isUserAdminStaff){
+        <div routerLink="users" style="cursor: pointer;"> Users</div>
+      }
+      
+      <div >
+        <button type="button" (click)="showUserOptions($event)" class="layout-topbar-action">
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+        </button>
+
+        <p-popover #op>
+            <div class="flex flex-col gap-4">
+                <div>
+                    <ul class="list-none p-0 m-0 flex flex-column">
+                        <li class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-border" (click)="updatePassword()">
+                            Update Password
+                        </li>
+                        <li class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-border" (click)="logout($event)">
+                            Logout
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </p-popover>
+      </div>
+    }
+    
+  </div>
+
+  <!-- Centered Home Section -->
+   @if(isAngularAppAtRoot()){
+    <div  class="home-section">
+      <h1>Welcome to the User Management Portal</h1>
+      @if (!isUserLoggedIn){
+      <button pButton label="Get Started" routerLink="login" class="p-button-rounded p-button-contrast mt-3"></button>
+      } @else {
+        <p>You are now logged in as <strong>{{ this.getName() }}</strong></p>
+      }
+    </div>
+   }
+  
+  <router-outlet></router-outlet>
+</div>

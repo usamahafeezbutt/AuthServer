@@ -1,0 +1,54 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="logo">𝕌𝕄ℙ</div>
+
+    <!-- External Login Buttons -->
+    <div class="social-buttons mt-5">
+      <button pButton (click)="loginWithExternalProvider('Google')" icon="pi pi-google" label="Google" class="p-button-contrast p-button-outlined p-button-sm"></button>
+      <button pButton (click)="loginWithExternalProvider('LinkedIn')" icon="pi pi-linkedin" label="LinkedIn" class="p-button-contrast p-button-outlined p-button-sm"></button>
+      <button pButton (click)="loginWithExternalProvider('Microsoft')" icon="pi pi-microsoft" label="Microsoft" class="p-button-contrast p-button-outlined p-button-sm"></button>
+    </div>
+
+    <!-- Login Form -->
+    <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="p-fluid">
+        <p-floatlabel variant="on" class="w-100">
+          <label for="name">Name</label>
+          <input id="name"  class="w-100" [fluid]="true" type="name" pInputText formControlName="name" />
+        </p-floatlabel>
+        
+        <p-floatlabel variant="on" class="mt-2 w-100">
+          <label for="phone">Phone</label>
+          <input id="phone"  class="w-100" [fluid]="true" type="phone" pInputText formControlName="phoneNumber" />
+        </p-floatlabel>
+
+        <p-floatlabel variant="on" class="mt-2 w-100">
+          <label for="email">Email</label>
+          <input id="email"  class="w-100" [fluid]="true" type="email" pInputText formControlName="email" />
+        </p-floatlabel>
+
+        <p-floatlabel variant="on" class="mt-2 w-100" >
+          <p-password 
+            formControlName="password" 
+            inputId="password"
+            [feedback]="true"
+            [promptLabel]="'Enter your password'"
+            [mediumRegex]="mediumRegex"
+            [strongRegex]="strongRegex"
+            minLength="12"
+            toggleMask="true"
+            style="width: 100%;"
+            [fluid]="true">
+          </p-password>
+          <label for="password">Password</label>
+        </p-floatlabel>
+
+        <button pButton label="Register" [disabled]="registerForm.invalid" class="p-button-contrast p-button-outlined p-button-rounded mt-3" [fluid]="true"></button>
+
+        <div class="div flex justify-content-end mt-2">
+          <p class="font-medium col-6 no-underline  text-right cursor-pointer sign-in-navigator" routerLink="/login">Sign In>></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

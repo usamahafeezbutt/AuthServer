@@ -1,0 +1,137 @@
+<div class="p-5">
+    <h2>Manage Users</h2>
+    <p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        <p-button *ngIf="isUseradmin" label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (click)="openNew()" />
+        <!-- <p-button *ngIf="isUseradmin" severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length" /> -->
+    </ng-template>
+
+    <ng-template #end>
+        <p-button label="Export" icon="pi pi-upload" severity="secondary" (click)="exportCSV()" />
+    </ng-template>
+    </p-toolbar>
+
+    <p-table
+    #dt
+    [value]="users"
+    [columns]="cols"
+    [globalFilterFields]="['name']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowHover]="true"
+    dataKey="id">
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0"></h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th pSortableColumn="name" style="min-width:16rem">
+                Name
+                <p-sortIcon field="name" />
+            </th>
+            <th pSortableColumn="email" style="min-width: 8rem">
+                Email
+                <p-sortIcon field="email" />
+            </th>
+            <th pSortableColumn="username" style="min-width:10rem">
+                Username
+                <p-sortIcon field="username" />
+            </th>
+            <th pSortableColumn="phoneNumber" style="min-width: 12rem">
+                Phone Number
+                <p-sortIcon field="phoneNumber" />
+            </th>
+            <th pSortableColumn="status" style="min-width: 12rem">
+                Status
+                <p-sortIcon field="status" />
+            </th>
+            <th pSortableColumn="role" style="min-width: 12rem">
+                Role
+                <p-sortIcon field="role" />
+            </th>
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-user>
+        <tr>
+            <td style="min-width: 16rem">{{ user.name }}</td>
+            <td style="min-width: 12rem">{{ user.email }}</td>
+            <td style="min-width: 12rem">{{ user.userName }}</td>
+            <td style="min-width: 12rem">{{ user.phoneNumber }}</td>
+            <td style="min-width: 12rem">{{ user.status }}</td>
+            <td style="min-width: 12rem">{{ user.role }}</td>
+            
+            <td>
+                <p-button *ngIf="isUseradmin" icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editProduct(user)" />
+                <!-- <p-button *ngIf="isUseradmin" icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteUser(user)" /> -->
+                <button *ngIf="user.status == 0 || user.status == 2" pButton pRipple class="p-button-rounded mr-2" (click)="updateAccountStatus(user, 1)">
+                     <i class="pi pi-thumbs-up-fill"></i>
+                </button>
+
+                <button *ngIf="user.status == 1" pButton pRipple class="p-button-rounded" (click)="updateAccountStatus(user, 2)">
+                    <i class="pi pi-stop-circle"></i>
+                </button>
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+
+    @if (users && users.length > 0){
+        <p-paginator
+        [rows]="pageSize"
+        [totalRecords]="totalRecords"
+        (onPageChange)="loadService($event)"
+        [rowsPerPageOptions]="rowsPerPageOptions">
+        </p-paginator>
+    }
+    
+
+    <p-dialog [(visible)]="userDialog" [style]="{ width: '450px' }" header="User Details" [modal]="true">
+        <form [formGroup]="addUpdateUserForm" (ngSubmit)="addUpdateUser()">
+            <div class=" gap-6">
+                <div class="mb-2">
+                    <label for="name" class="block font-bold my-3">Name</label>
+                    <input type="text" pInputText id="name" formControlName="name" required autofocus fluid />
+                </div>
+                
+                <div class="mb-2">
+                    <p-select [options]="roles" appendTo="body" formControlName="role" optionLabel="name" placeholder="Assign Role" fluid />
+                </div>
+
+                <div class="mb-2">
+                    <label for="email" class="block font-bold mb-3">Email</label>
+                    <input type="text" pInputText id="email" formControlName="email" required autofocus fluid />
+                </div>
+
+                @if(this.user && !this.user.id){
+                    <div class="mb-2">
+                        <label for="email" class="block font-bold mb-3">Password</label>
+                        <p-password formControlName="password" [feedback]="false" fluid/>
+                    </div>
+                }
+                
+                
+                <div class="mb-2">
+                    <label for="phoneNumber" class="block font-bold mb-3">Phone No</label>
+                    <input type="text" pInputText id="phoneNumber" formControlName="phoneNumber" required autofocus fluid />
+                </div>
+                
+                <div class="mb-2">
+                    <label for="status" class="block font-bold mb-3">Status</label>
+                    <p-selectbutton [options]="stateOptions" formControlName="status" optionLabel="label" optionValue="value" aria-labelledby="basic" />
+                </div>
+            </div>
+
+            <button type="submit" class="p-button" >Save <i class="pi pi-check"></i></button>
+        </form>
+    </p-dialog>
+
+    <p-confirmdialog [style]="{ width: '450px' }" />
+</div>
+
+    
