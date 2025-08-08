@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{245A83B4-9997-4E6B-AED5-13060AC013E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{18F47248-57B2-4D0D-B1F4-FD158D55B937}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{43362030-B6CC-4CDC-B3FB-87653DC44E3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{81876F20-8146-4425-AD75-833CEC3B121F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.WebApp", "src\Presentation\AuthServer.WebApp\AuthServer.WebApp.csproj", "{83FFEBCF-3293-4E13-966E-3332B3908B6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.Infrastructure", "src\Infrastructure\AuthServer.Infrastructure\AuthServer.Infrastructure.csproj", "{281D0D2C-0EC9-4393-85FB-3FDC8D251AD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.Domain", "src\Domain\AuthServer.Domain\AuthServer.Domain.csproj", "{AC3C1BD7-612F-436D-A366-B08A49621322}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.Application", "src\Application\AuthServer.Application\AuthServer.Application.csproj", "{2359E15A-1446-41B9-A21E-FA9B333EDF61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83FFEBCF-3293-4E13-966E-3332B3908B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83FFEBCF-3293-4E13-966E-3332B3908B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83FFEBCF-3293-4E13-966E-3332B3908B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83FFEBCF-3293-4E13-966E-3332B3908B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281D0D2C-0EC9-4393-85FB-3FDC8D251AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281D0D2C-0EC9-4393-85FB-3FDC8D251AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281D0D2C-0EC9-4393-85FB-3FDC8D251AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281D0D2C-0EC9-4393-85FB-3FDC8D251AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3C1BD7-612F-436D-A366-B08A49621322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3C1BD7-612F-436D-A366-B08A49621322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3C1BD7-612F-436D-A366-B08A49621322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3C1BD7-612F-436D-A366-B08A49621322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2359E15A-1446-41B9-A21E-FA9B333EDF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2359E15A-1446-41B9-A21E-FA9B333EDF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2359E15A-1446-41B9-A21E-FA9B333EDF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2359E15A-1446-41B9-A21E-FA9B333EDF61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{245A83B4-9997-4E6B-AED5-13060AC013E6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{18F47248-57B2-4D0D-B1F4-FD158D55B937} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{43362030-B6CC-4CDC-B3FB-87653DC44E3A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{81876F20-8146-4425-AD75-833CEC3B121F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{83FFEBCF-3293-4E13-966E-3332B3908B6C} = {18F47248-57B2-4D0D-B1F4-FD158D55B937}
+		{281D0D2C-0EC9-4393-85FB-3FDC8D251AD4} = {81876F20-8146-4425-AD75-833CEC3B121F}
+		{AC3C1BD7-612F-436D-A366-B08A49621322} = {43362030-B6CC-4CDC-B3FB-87653DC44E3A}
+		{2359E15A-1446-41B9-A21E-FA9B333EDF61} = {245A83B4-9997-4E6B-AED5-13060AC013E6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B05C859F-F442-4649-B916-D6B3BB0E4D5E}
+	EndGlobalSection
+EndGlobal
