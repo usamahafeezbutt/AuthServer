@@ -13,7 +13,6 @@ namespace CleanArchitecture.Infrastructure.Identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
             return services;
         }
     }
