@@ -21,7 +21,9 @@ namespace AuthServer.Application
                     cfg.AddMaps(Assembly.GetExecutingAssembly());
                 },
                 provider.GetRequiredService<ILoggerFactory>()).CreateMapper()
-            ); 
+            );
+
+            services.AddMemoryCache();
 
             services.AddValidatorsFromAssembly(thisAssembly);
 
