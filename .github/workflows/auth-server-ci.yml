@@ -54,5 +54,5 @@ jobs:
         run: |
           docker build \
             -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }} \
-            -f ./src/Presentation/AuthServer.WebApp/Client/auth-client/Dockerfile .
+            -f ./src/Presentation/AuthServer.WebApp/Client/auth-client/Dockerfile \
           docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
