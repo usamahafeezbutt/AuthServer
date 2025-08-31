@@ -63,7 +63,7 @@ jobs:
           
       - name: Deploy to Cloud Run
         run: |
-          IMAGE="${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/{{ env.REPO_NAME }}/backend:${{ github.sha }}"
+          IMAGE="${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/backend:${{ github.sha }}"
           gcloud run deploy backend \
             --image $IMAGE \
             --region ${{ secrets.GCP_REGION }} \
