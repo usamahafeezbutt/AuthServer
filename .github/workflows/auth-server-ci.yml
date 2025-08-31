@@ -40,19 +40,23 @@ jobs:
       # Setup Docker auth for Artifact Registry
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet
-
+        
       # Build & push backend image
       - name: Build & Push Backend
         run: |
           docker build \
             -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.BACKEND_IMAGE }}:${{ github.sha }} \
+            -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.BACKEND_IMAGE }}:latest \
             -f ./src/Presentation/AuthServer.WebApp/Dockerfile .
           docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+          docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.BACKEND_IMAGE }}:latest
       
       # Build & push frontend image
       - name: Build & Push Frontend
         run: |
           docker buildx build \
             -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }} \
+            -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:latest \
             ./src/Presentation/AuthServer.WebApp/Client/auth-client
           docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+          docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:latest
