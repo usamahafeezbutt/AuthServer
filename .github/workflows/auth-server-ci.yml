@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master   # Run workflow when pushing to main branch
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: ${{ secrets.GCP_REGION }}
+  GAR_LOCATION: ${{ secrets.GCP_REGION }}-docker.pkg.dev
+  REPO_NAME: ${{ secrets.GCP_REPOSITORY }}
+  BACKEND_IMAGE: backend
+  FRONTEND_IMAGE: frontend
+  AUTHENTICATION__GOOGLE__CLIENTID: ${{ secrets.AUTHENTICATION__GOOGLE__CLIENTID }}
+  AUTHENTICATION__GOOGLE__CLIENTSECRET: ${{ secrets.AUTHENTICATION__GOOGLE__CLIENTSECRET }}
+  AUTHENTICATION__LINKEDIN__CLIENTID: ${{ secrets.AUTHENTICATION__LINKEDIN__CLIENTID }}
+  AUTHENTICATION__LINKEDIN__CLIENTSECRET: ${{ secrets.AUTHENTICATION__LINKEDIN__CLIENTSECRET }}
+  AUTHENTICATION__MICROSOFT__CLIENTID: ${{ secrets.AUTHENTICATION__MIRCOSOFT__CLIENTID }}
+  AUTHENTICATION__MICROSOFT__CLIENTSECRET: ${{ secrets.AUTHENTICATION__MIRCOSOFT__CLIENTSECRET }}
+  SMTPSETTINGS__SENDERADDRESS: ${{ secrets.SMTPSETTINGS__SENDERADDRESS }}
+  SMTPSETTINGS__USERNAME: ${{ secrets.SMTPSETTINGS__USERNAME }}
+  SMTPSETTINGS__PASSWORD: ${{ secrets.SMTPSETTINGS__PASSWORD }}
+  SMTPSETTINGS__HOST: ${{ secrets.SMTPSETTINGS__HOST }}
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      # Authenticate with GCP
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      # Setup Docker auth for Artifact Registry
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet
+
+      # Build & push backend image
+      - name: Build & Push Backend
+        run: |
+          docker build -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.BACKEND_IMAGE }}:${{ github.sha }} ./backend
+          docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+
+      # Build & push frontend image
+      - name: Build & Push Frontend
+        run: |
+          docker build -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }} ./frontend
+          docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+
