@@ -8,6 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   REGION: ${{ secrets.GCP_REGION }}
+  SERVICE_REGION: ${{ secrets.GCP_SERVICE_REGION }}
   GAR_LOCATION: ${{ secrets.GCP_REGION }}-docker.pkg.dev
   REPO_NAME: ${{ secrets.GCP_REPOSITORY }}
   BACKEND_IMAGE: backend
@@ -63,10 +64,10 @@ jobs:
           
       - name: Deploy to Cloud Run
         run: |
-          IMAGE="${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/backend:${{ github.sha }}"
+          IMAGE="${{ secrets.SERVICE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/backend:${{ github.sha }}"
           gcloud run deploy backend \
             --image $IMAGE \
-            --region ${{ secrets.GCP_REGION }} \
+            --region ${{ secrets.SERVICE_REGION }} \
             --platform managed \
             --allow-unauthenticated \
             --set-env-vars ASPNETCORE_ENVIRONMENT=Production
