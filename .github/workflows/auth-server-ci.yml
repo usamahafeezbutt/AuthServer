@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master   # Run workflow when pushing to main branch
+      - develop   # Run workflow when pushing to main branch
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -52,7 +52,7 @@ jobs:
       # Build & push frontend image
       - name: Build & Push Frontend
         run: |
-          docker build \
+          docker buildx build \
             -t ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }} \
-            -f ./src/Presentation/AuthServer.WebApp/Client/auth-client/Dockerfile \
+            ./src/Presentation/AuthServer.WebApp/Client/auth-client
           docker push ${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
