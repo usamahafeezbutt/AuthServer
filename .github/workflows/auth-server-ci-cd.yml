@@ -64,10 +64,11 @@ jobs:
           
       - name: Deploy to Cloud Run
         run: |
-          IMAGE="${{ secrets.SERVICE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/backend:${{ github.sha }}"
+          IMAGE="${{ env.SERVICE_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/backend:${GITHUB_SHA}"
+          echo "Deploying image: $IMAGE"
           gcloud run deploy backend \
-            --image $IMAGE \
-            --region ${{ secrets.SERVICE_REGION }} \
-            --platform managed \
+            --image="$IMAGE" \
+            --region="${{ env.SERVICE_REGION }}" \
+            --platform=managed \
             --allow-unauthenticated \
-            --set-env-vars ASPNETCORE_ENVIRONMENT=Production
+            --set-env-vars=ASPNETCORE_ENVIRONMENT=Production
